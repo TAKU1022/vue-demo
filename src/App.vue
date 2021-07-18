@@ -17,25 +17,39 @@
       :total-number="number"
       @my-click="incrementNumber($event)"
     ></LikeNumber>
-    <LikeNumber :total-number="number"></LikeNumber>
+
+    <button @click="changeComponent('Home')">Home</button>
+    <button @click="changeComponent('About')">About</button>
+
+    <keep-alive>
+      <component :is="currentComponent"></component>
+    </keep-alive>
   </article>
 </template>
 
 <script>
   import LikeHeader from './components/LikeHeader.vue';
+  import Home from './components/Home.vue';
+  import About from './components/About.vue';
 
   export default {
     data() {
       return {
         number: 10,
+        currentComponent: 'Home',
       };
     },
     components: {
       LikeHeader,
+      Home,
+      About,
     },
     methods: {
       incrementNumber(value) {
         this.number = value;
+      },
+      changeComponent(compornent) {
+        this.currentComponent = compornent;
       },
     },
   };
