@@ -3,21 +3,25 @@
     <p v-border:solid.round="{ width: '3px', color: 'brown' }">Home</p>
     <h2>{{ title | lowerCase | upperCase }}</h2>
     <p>{{ subTitle | upperCase | lowerCase }}</p>
+    <p>{{ number }}</p>
+    <button @click="number++">+1</button>
+    <CountNumber></CountNumber>
   </div>
 </template>
 
 <script>
+  import CountNumber from './CountNumber.vue';
+  import { tokyoNumber } from '@/tokyoNumber.js';
+
   export default {
+    mixins: [tokyoNumber],
     data() {
       return {
-        title: 'Welcome to Tokyo',
-        subTitle: 'Tokyo is a great city',
+        mainText: 'メイン',
       };
     },
-    filters: {
-      lowerCase(value) {
-        return value.toLowerCase();
-      },
+    components: {
+      CountNumber,
     },
     directives: {
       border(el, binding) {
